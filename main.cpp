@@ -9,10 +9,39 @@ class vector{
     // Here  we are initializing the vector with size=0, capacity=0,base_addr=bull_pointer    
     vector():size(0),capacity(0),base_addr(nullptr){};
         
+    ~vector(){
+        delete[] base_addr;
+    };
+
+
+    vector(class vector& other):size(other.size),capacity(other.capacity){
+        base_addr = new int[capacity];
+        for(int i = 0; i<size;i++){
+            base_addr[i] = other.base_addr[i];
+        };
+    };
+
+    vector& operator=(const class vector &other){
+        if(this == &other)
+            return *this;
+        
+        delete[] base_addr;
+
+        capacity = other.capacity;
+        size = other.size;
+        base_addr = new int[capacity];
+
+        for(int i =0;i<size;i++){
+            base_addr[i] = other.base_addr[i];
+        };
+
+        return *this;
+    };
+
         // Here we are creating the push method for vector
         void push(int num){
             // If capacity is zero or we have null pointer (That means we are initializing the vector)
-            if(capacity == 0 || base_addr == nullptr){
+            if(capacity == 0){
                 size = 0;
                 capacity = 2;
                 // Giving initial values for the vector then the vector will internally calculate 
@@ -20,7 +49,7 @@ class vector{
                 base_addr = new int[capacity];
             } else if (size == capacity){
                 // if our size ==  capacity of memory we will then reallocate the capacity and the memeory
-                int capacity = max(1, 2*capacity);
+                capacity = max(1, 2*capacity);
                 // Here we are craeting a temporary pointer so that we can copy the data from 
                 // previous address and then again insert it back after we relocate the address
                 
@@ -40,6 +69,7 @@ class vector{
             size++;
             
         }
+
 };
 
 int main(){
