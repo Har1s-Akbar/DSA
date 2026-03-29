@@ -69,6 +69,20 @@ class LinkedList{
 			
 		};
 
+		void reverseList(){
+			Node* nodeCurrent = head;
+			Node* nodeNext = nullptr;
+			Node* nodePrev = nullptr;
+			while(nodeCurrent != nullptr){
+				nodeNext = nodeCurrent->next;
+				nodeCurrent -> next = nodePrev;
+				nodePrev = nodeCurrent;
+				nodeCurrent = nodeNext;
+			};
+			head = nodePrev;
+
+		};
+
 		~LinkedList(){
 			Node* current = head;
 			while(current != nullptr){
@@ -98,5 +112,8 @@ int main(){
 	list.printList();
 	list.deleteNode(0);
 	std::cout<<"\nfifth Print deltion at head\n";
+	list.printList();
+	list.reverseList();
+	std::cout<<"\nSixth Print reverse lsit\n";
 	list.printList();
 }
