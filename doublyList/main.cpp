@@ -40,11 +40,29 @@ class doublyList{
                 temp = temp->next;
             };
         };
-
         void displayReverse(){
             displayReverseFun(head);
         };
 
+        void insertAtIndex(int index, int num){
+            if(index == 0){
+                push(num);
+            };
+
+            int i = 0;
+            Node* temp = head;
+            Node* newNode = new Node(num);
+            while(temp!=nullptr && i<index){
+                i++;
+                temp= temp->next;
+            };
+                newNode->prev = temp->prev;
+                newNode->next = temp;
+                if(temp->prev != nullptr){
+                temp->prev->next=newNode;
+                };
+                temp->prev = newNode;
+        };
         ~doublyList(){
             Node* nextNode= nullptr;
             while(head!= nullptr){
@@ -66,5 +84,7 @@ int main(){
     list.displayForward();
     std::cout<<"\nReverse print"<<"\n";
     list.displayReverse();
+    list.insertAtIndex(2,50);
+    list.displayForward();
     return 0;
 }

@@ -41,7 +41,7 @@ class LinkedList{
 				while(tempCurrent != nullptr && index < i){
 					previous = tempCurrent;
 					tempCurrent= tempCurrent->next;
-				index++;
+					index++;
 				};
 				temp->next = tempCurrent;
 				previous->next = temp;
