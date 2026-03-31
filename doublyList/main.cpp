@@ -12,6 +12,13 @@ struct Node{
 class doublyList{
     private:
     Node* head;
+    void displayReverseFun(Node* head){
+        if(head== nullptr){
+                return;    
+            };
+        displayReverseFun(head->next);
+        std::cout<<head->data<<" ";
+        };
 
     public:
         doublyList():head(nullptr){};
@@ -25,14 +32,19 @@ class doublyList{
             };
             head = temp;
         };
-        void display(){
+        void displayForward(){
             Node* temp = head;
-            std::cout<<"Displaying in forward manner";
+            std::cout<<"Displaying in forward manner\n";
             while(temp!= nullptr){
                 std::cout<<temp->data<<" ";
                 temp = temp->next;
             };
-        }
+        };
+
+        void displayReverse(){
+            displayReverseFun(head);
+        };
+
         ~doublyList(){
             Node* nextNode= nullptr;
             while(head!= nullptr){
@@ -51,7 +63,8 @@ int main(){
     list.push(6);
     list.push(9);
     list.push(3);
-    list.display();
-
+    list.displayForward();
+    std::cout<<"\nReverse print"<<"\n";
+    list.displayReverse();
     return 0;
 }
