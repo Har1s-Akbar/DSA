@@ -118,15 +118,15 @@ void reverse (){
 
 int main(){
 	LinkedList list;
-	list.insert(0,2);
-	list.insert(0,3);
+	list.insert(0,19);
+	list.insert(0,77);
 	list.insert(0,5);
 	std::cout<<"\nfirst Print list initializing\n";
 	list.printList();
-	list.insert(1,7);
+	list.insert(1,79);
 	std::cout<<"\nsecond Print actual insertion at index 1\n";
 	list.printList();
-	list.insert(2,10);
+	list.insert(2,1);
 	std::cout<<"\nthird Print actual insertion at index 2\n";
 	list.printList();
 	list.deleteNode(2);
