@@ -13,7 +13,7 @@ class LinkedList{
 		// I moved the recursive method to the private field of our class because recursive method required the use of head which is
 		// a private field, So instead of asking the user to pass the head we are using another function reverse(), which will 
 		// check if the head == nullptr then it will return the control to the function because we can not reerse a null linked list
-		// but if it is not empty then the control is handed over to our recursive function
+		// but if it is not empty then the control is handed over to our recursive function that will reverse the list.
 		Node* reversalRecursive(Node* head){
 			if(head->next== nullptr || head == nullptr){
 				return head;
