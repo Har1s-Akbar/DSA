@@ -70,17 +70,29 @@ class LinkedList{
 		};
 
 		void reverseList(){
-			Node* nodeCurrent = head;
-			Node* nodeNext = nullptr;
-			Node* nodePrev = nullptr;
-			while(nodeCurrent != nullptr){
-				nodeNext = nodeCurrent->next;
-				nodeCurrent -> next = nodePrev;
-				nodePrev = nodeCurrent;
-				nodeCurrent = nodeNext;
-			};
-			head = nodePrev;
+			Node* prev = nullptr;
+			Node* current = head;
+			Node* next = nullptr;
+			while(current != nullptr){
+				next = current->next;
+				current->next = prev;
 
+				prev = current;
+				current = next;
+			}
+			head = prev;
+		};
+		Node* reversalRecursive(Node* head){
+			if(head->next== nullptr || head == nullptr){
+				return head;
+			};
+
+			Node* newHead = reversalRecursive(head->next);
+			head->next->next = head;
+
+			head->next = nullptr;
+
+			return newHead;
 		};
 
 		~LinkedList(){
