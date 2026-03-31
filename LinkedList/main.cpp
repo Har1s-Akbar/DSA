@@ -10,6 +10,22 @@ struct Node{
 class LinkedList{
 	private:
 		Node* head = nullptr;
+		// I moved the recursive method to the private field of our class because recursive method required the use of head which is
+		// a private field, So instead of asking the user to pass the head we are using another function reverse(), which will 
+		// check if the head == nullptr then it will return the control to the function because we can not reerse a null linked list
+		// but if it is not empty then the control is handed over to our recursive function
+		Node* reversalRecursive(Node* head){
+			if(head->next== nullptr || head == nullptr){
+				return head;
+			};
+
+			Node* newHead = reversalRecursive(head->next);
+			head->next->next = head;
+
+			head->next = nullptr;
+
+			return newHead;
+		};
 
 	public:
 		void insert(int i, int numInsert){
@@ -68,33 +84,27 @@ class LinkedList{
 			delete nodeCurrent;
 			
 		};
+// Iterative method for the reversal of linked list
+		// void reverseList(){
+		// 	Node* prev = nullptr;
+		// 	Node* current = head;
+		// 	Node* next = nullptr;
+		// 	while(current != nullptr){
+		// 		next = current->next;
+		// 		current->next = prev;
 
-		void reverseList(){
-			Node* prev = nullptr;
-			Node* current = head;
-			Node* next = nullptr;
-			while(current != nullptr){
-				next = current->next;
-				current->next = prev;
-
-				prev = current;
-				current = next;
-			}
-			head = prev;
-		};
-		Node* reversalRecursive(Node* head){
-			if(head->next== nullptr || head == nullptr){
-				return head;
-			};
-
-			Node* newHead = reversalRecursive(head->next);
-			head->next->next = head;
-
-			head->next = nullptr;
-
-			return newHead;
-		};
-
+		// 		prev = current;
+		// 		current = next;
+		// 	}
+		// 	head = prev;
+		// };
+// Iterative method for the reversal of linked list
+void reverse (){
+	if (head == nullptr){
+		return;
+	}
+	head = reversalRecursive(head);
+}
 		~LinkedList(){
 			Node* current = head;
 			while(current != nullptr){
@@ -125,7 +135,9 @@ int main(){
 	list.deleteNode(0);
 	std::cout<<"\nfifth Print deltion at head\n";
 	list.printList();
-	list.reverseList();
+	list.reverse();
 	std::cout<<"\nSixth Print reverse lsit\n";
 	list.printList();
+
+	// list.reversalRecursive(head);
 }
