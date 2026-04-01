@@ -58,6 +58,34 @@ class DoublyCircularList{
         temp->prev = newNode;
     };
 
+    void deleteAtIndex(int index){
+        if(head == nullptr){
+            std::cout<<"List is already empty";
+            return;
+        };
+        Node* temp = head;
+        int i =0;
+        while(i<index){
+            i++;
+            temp=temp->next;
+            if(temp == head){
+                std::cout<<"Out of bound , index does not exist";
+                return;
+            };
+        };
+        if(temp->next == temp){
+            head = nullptr;
+        }else
+        {    
+            temp->next->prev=temp->prev;
+            temp->prev->next = temp->next;
+            if(temp==head){
+                head = temp->next;
+            };
+        };
+        delete temp;
+    };
+
     void display(){
         if (head== nullptr) return;
         Node* temp = head;
@@ -90,5 +118,8 @@ int main(){
     list.display();
     list.insertAtIndex(3,10);
     list.display();
+    list.deleteAtIndex(0);
+    list.display();
+    list.deleteAtIndex(10);
     return 0;
 }
