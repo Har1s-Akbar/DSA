@@ -63,6 +63,35 @@ class doublyList{
                 };
                 temp->prev = newNode;
         };
+        void deleteAtIndex(int index){
+            int i =0;
+            Node* temp = head;
+            if(head == nullptr){
+                std::cout<<"\nThe list is already empty\n";
+                return;
+            };
+            if(index == 0){
+                head = temp->next;
+                if(head!= nullptr){
+                    temp->next->prev = nullptr;
+                };
+                delete temp;
+                return;
+            };
+            while(temp != nullptr && i<index){
+                i++;
+                temp=temp->next;
+            };
+            if(temp == nullptr){
+                std::cout<<"\nthe index does not exist\n";
+                return;
+            };
+            if(temp->next != nullptr){
+            temp->next->prev = temp->prev;
+            };
+            temp->prev->next = temp->next;
+            delete temp;
+        };
         ~doublyList(){
             Node* nextNode= nullptr;
             while(head!= nullptr){
@@ -85,6 +114,10 @@ int main(){
     std::cout<<"\nReverse print"<<"\n";
     list.displayReverse();
     list.insertAtIndex(2,50);
+    list.displayForward();
+    list.deleteAtIndex(7);
+    list.deleteAtIndex(2);
+    list.push(4);
     list.displayForward();
     return 0;
 }
