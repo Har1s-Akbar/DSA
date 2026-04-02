@@ -9,25 +9,25 @@ struct Point{
 
 class Stack{
     private:
-        Point* head=nullptr;
+        Point* top=nullptr;
 
     public:
     void push(int num){
         Point* newPoint = new Point(num);
-        newPoint->next = head;
-        head = newPoint;
+        newPoint->next = top;
+        top = newPoint;
     };
     void pop(){
-        Point* temp = head;
-        if(head == nullptr){
+        Point* temp = top;
+        if(top == nullptr){
             std::cout<<"Stack is already empty\n";
             return;
         };
-        head = head->next;
+        top = top->next;
         delete temp;
     };
-    int peak(){
-        Point* temp = head;
+    int peek(){
+        Point* temp = top;
 
         if(temp != nullptr){
             return temp->data;
@@ -36,22 +36,44 @@ class Stack{
         };
     };
 
+    bool isEmpty(){
+        if(top==nullptr){
+            return true;
+        }else{
+            return false;
+        };
+    };
+
+    ~Stack(){
+        Point* temp = top;
+        Point* tempNext = nullptr;
+        while(temp!= nullptr){
+            tempNext= temp->next;
+            delete temp;
+            temp = tempNext;
+        }
+    };
+
 };
 
 int main(){
     Stack stack;
-    stack.peak();
+    bool empty = stack.isEmpty();
+    std::cout<<"Is stack empty "<<empty<<"\n";
+    stack.peek();
     stack.push(3);
     stack.push(6);
     stack.push(9);
     stack.push(0);
     stack.push(18);
-    int num =stack.peak();
+    bool empty1 = stack.isEmpty();
+    std::cout<<"Is stack empty "<<empty1<<"\n";
+    int num =stack.peek();
     std::cout<<num<<"\n";
     stack.pop();
     stack.pop();
     stack.pop();
-    int num1 = stack.peak();
+    int num1 = stack.peek();
     std::cout<<num1<<"\n";
     return 0;
 }
