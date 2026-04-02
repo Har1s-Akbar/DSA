@@ -28,6 +28,25 @@ class DummyCircular{
         head->next->prev= newNode;
         head->next = newNode;
     };
+
+    void insertAtN(int index, int num){
+        Node* temp = head;
+        int i =0;
+        while(i<=index){
+            i++;
+            temp = temp->next;
+            if(temp == head){
+                std::cout<<"\nOut of bound, index does not exist\n";
+                return;
+            };
+        };
+        Node* newNode = new Node(num);
+        newNode->prev = temp->prev;
+        newNode->next = temp;
+
+        temp->prev->next = newNode;
+        temp->prev = newNode;
+    };
     void display(){
         Node* temp = head->next;
         while(temp != head){
@@ -57,5 +76,8 @@ int main(){
     list.insertAtHead(8);
     list.insertAtHead(9);
     list.display();
+    list.insertAtN(2,0);
+    list.display();
+    list.insertAtN(8,3);
     return 0;
 }
