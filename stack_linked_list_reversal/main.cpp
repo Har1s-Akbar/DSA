@@ -49,6 +49,13 @@ class Stack{
             temp=tempNext;
         };
     };
+    bool isEmpty(){
+        if(top == nullptr){
+            return 1;
+        }else{
+            return 0;
+        };
+    }
 };
 
 
