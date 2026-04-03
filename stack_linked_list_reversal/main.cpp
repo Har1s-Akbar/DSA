@@ -8,10 +8,10 @@ struct Node{
 };
 
 struct StackNode{
-    Node* node;
+    Node* data;
     StackNode* next;
 
-    StackNode(Node* &ptr):node(ptr), next(nullptr){};
+    StackNode(Node* &ptr):data(ptr), next(nullptr){};
 };
 class Stack{
     private:
@@ -32,12 +32,12 @@ class Stack{
         top = top->next;
         delete temp;
     };
-    StackNode* peek(){
+    Node* peek(){
         if(top == nullptr){
             std::cout<<"Can not peek, stack empty;";
             return 0;
         }else{
-            return top->next;
+            return top->data;
         };
     };
     ~Stack(){
@@ -47,7 +47,7 @@ class Stack{
             tempNext = temp->next;
             delete temp;
             temp=tempNext;
-        }
+        };
     };
 };
 
@@ -73,10 +73,21 @@ class LinkedList{
     void reverse(){
         Stack stack;
         Node* temp = head;
+        while(temp != nullptr){
+            stack.push(temp);
+            temp=temp->next;
+        };
 
-
-
-    }
+        head = stack.peek();
+        Node* tempN = head;
+        stack.pop();
+        while(stack.peek() != nullptr){
+             tempN->next = stack.peek();
+             stack.pop();
+             tempN = tempN->next;
+        };
+        tempN->next = nullptr;
+    };
     
     ~LinkedList(){
         Node* temp = head;
@@ -89,6 +100,17 @@ class LinkedList{
     }
 };
 
-int main(){
-
-};
+int main() {
+    LinkedList myList;
+    myList.insert(10);
+    myList.insert(20);
+    myList.insert(30);
+    myList.insert(40);
+    std::cout << "Original List: ";
+    myList.display();
+    std::cout << "Reversing the list using the Stack..." << std::endl;
+    myList.reverse();
+    std::cout << "Reversed List: ";
+    myList.display();
+    return 0;
+}
