@@ -79,3 +79,7 @@ class LinkedList{
         }
     }
 };
+
+int main(){
+
+};
