@@ -53,6 +53,27 @@ class Stack{
     };
 };
 
+bool isBalanced(std::string equation){
+    Stack stack;
+    for(char e : equation){
+        if(e =='('|| e =='[' || e == '{'){
+            stack.push(e);
+        }
+        if(e ==')'|| e ==']' || e == '}'){
+            if(stack.isEmpty()){
+                return false;
+            }else{
+                char tempChar = stack.peek();
+                if((e == ')' && tempChar == '(') || (e == ']' && tempChar == '[') || (e == '}' && tempChar == '{')){
+                    stack.pop();
+                }else{
+                    return false;
+                }
+            }
+        }
+    }
+    return stack.isEmpty();
+};
 
 
 int main() {
