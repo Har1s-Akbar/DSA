@@ -6,48 +6,49 @@ struct Node{
 
     Node(int num):data(num), next(nullptr){};
 };
+
+struct StackNode{
+    Node* node;
+    StackNode* next;
+
+    StackNode(Node* &ptr):node(ptr), next(nullptr){};
+};
 class Stack{
     private:
-    Node* top = nullptr;
+    StackNode* top = nullptr;
 
     public:
-    void push(int num){
-        Node* newTop = new Node(num);
-        newTop->next = top;
-        top=newTop;
-    }
+    void push(Node* ptr){
+        StackNode* newNode = new StackNode(ptr);
+        newNode->next = top;
+        top = newNode;
+    };
     void pop(){
-        Node* tempTop =  top;
-        if(tempTop!= nullptr){
-            top = top->next;
-            delete tempTop;
-        }else{
-            std::cout<<"\nCan not delete list is already empty\n";
+        StackNode* temp = top;
+        if(top == nullptr){
+            std::cout<<"\nCan not pop, stack already empty\n";
             return;
+        };
+        top = top->next;
+        delete temp;
+    };
+    StackNode* peek(){
+        if(top == nullptr){
+            std::cout<<"Can not peek, stack empty;";
+            return 0;
+        }else{
+            return top->next;
+        };
+    };
+    ~Stack(){
+        StackNode* temp = top;
+        StackNode* tempNext = nullptr;
+        while(temp!= nullptr){
+            tempNext = temp->next;
+            delete temp;
+            temp=tempNext;
         }
     };
-
-    int peek(){
-        Node* tempTop = top;
-        if(tempTop == nullptr){
-            return tempTop->data;
-        }else{
-            std::cout<<"\nList is empty\n";
-            return 0;
-        };
-    }
-
-    ~Stack(){
-        Node* tempTop = top;
-        Node* nextTop = nullptr;
-
-        while(tempTop!= nullptr){
-            nextTop = tempTop->next;
-            delete tempTop;
-            tempTop = nextTop;
-        }
-    }
-
 };
 
 
@@ -68,6 +69,14 @@ class LinkedList{
         }
         std::cout<<"\n";
     };
+
+    void reverse(){
+        Stack stack;
+        Node* temp = head;
+
+
+
+    }
     
     ~LinkedList(){
         Node* temp = head;
