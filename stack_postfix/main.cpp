@@ -40,16 +40,16 @@ int evaluatedPostfix(std::string expression){
     Stack_postfix stack;
     for(char single: expression){
         if(std::isdigit(static_cast<unsigned char>(single))){
-            stack.push(single);
+            stack.push(single -  '0');
         }else if(single == '/'||single =='+'||single=='-'||single=='*'){
          int val1 = stack.peek();
          stack.pop();
          int val2 = stack.peek();
          stack.pop();
-         if(single =='+') return (val2+val1);
-         if(single =='-') return (val2-val1);
-         if(single =='*') return (val2*val1);
-         if(single =='/') return (val2/val1);
+         if(single =='+') return (val2+val1); stack.push(val2+val1);
+         if(single =='-') return (val2-val1);stack.push(val2-val1);
+         if(single =='*') return (val2*val1);stack.push(val2*val1);
+         if(single =='/') return (val2/val1);stack.push(val2/val1);
         }else{
             std::cout<<"\nNot a correct expression\n";
         };
@@ -58,6 +58,6 @@ int evaluatedPostfix(std::string expression){
 };
 
 int main(){
-    int result = evaluatedPostfix("66-");
+    int result = evaluatedPostfix("63*");
     std::cout<<result;
 }
