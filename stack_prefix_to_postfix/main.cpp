@@ -2,10 +2,10 @@
 #include <string>
 
 struct Node{
-    int data;
+    std::string data;
     Node* next;
 
-    Node(int num):data(num), next(nullptr){};
+    Node(std::string num):data(num), next(nullptr){};
 };
 
 class Stack{
@@ -13,14 +13,14 @@ class Stack{
     Node* top=nullptr;
 
     public:
-    void push(int data){
+    void push(std::string data){
         Node* newNode = new Node(data);
         newNode->next = top;
         top = newNode;
     };
-    int peek(){
+    std::string peek(){
         if(top == nullptr){
-            return 0;
+            return "0";
         }else{
             return top->data;
         };
@@ -48,23 +48,22 @@ class Stack{
 
 std::string conversion(std::string expression){
     Stack stack;
-    for(int i = expression.length()-1; i <=0;i--){
-        if(std::isdigit(static_cast<unsigned char>(expression[i]))){
-            stack.push(expression[i]);
-        }else if(expression == "/" ||expression == "*" ||expression == "-" ||expression == "+"){
-            int val1 = stack.peek();
-            stack.pop();
-            int val2 = stack.peek();
-            stack.pop();
-            expression[3] = expression[i];
-            expression[2] = val1;
-            expression[1] = val2;
+    for(int i = expression.length()-1; i>=0;i--){
+        char single =expression[i];
+        if(std::isdigit(single)){
+            stack.push(std::string(1,single));
+        }else if(single == '+' || single == '-' || single == '*' || single == '/'){
+            std::string s1 = stack.peek(); stack.pop();
+            std::string s2 = stack.peek();stack.pop();
+
+            std::string final = s1 + s2 + single;
+            stack.push(final);
         }
     };
-    return expression;
+    return stack.peek();
 };
 
 int main(){
-    std::string result = conversion('+42');
-    std::cout<<result;
+    std::string fin = conversion("/98");
+    std::cout<<fin;
 }
