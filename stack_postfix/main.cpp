@@ -46,18 +46,18 @@ int evaluatedPostfix(std::string expression){
          stack.pop();
          int val2 = stack.peek();
          stack.pop();
-         if(single =='+') return (val2+val1); stack.push(val2+val1);
-         if(single =='-') return (val2-val1);stack.push(val2-val1);
-         if(single =='*') return (val2*val1);stack.push(val2*val1);
-         if(single =='/') return (val2/val1);stack.push(val2/val1);
+         if(single =='+') stack.push(val2+val1);
+         if(single =='-') stack.push(val2-val1);
+         if(single =='*') stack.push(val2*val1);
+         if(single =='/') stack.push(val2/val1);
         }else{
             std::cout<<"\nNot a correct expression\n";
         };
     };
-    return 0;
+    return stack.peek();
 };
 
 int main(){
-    int result = evaluatedPostfix("63*");
+    int result = evaluatedPostfix("63/");
     std::cout<<result;
 }
