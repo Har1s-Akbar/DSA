@@ -34,7 +34,11 @@ class Queue{
             Node* tempNext = front->next;
             delete temp;
             front=tempNext;
-        }
+
+            if(front == nullptr){
+                rear = nullptr;
+            }
+        };
     };
 
     int peek(){
@@ -43,6 +47,11 @@ class Queue{
             return -1;
         };
         return front->data;
+    }
+    ~Queue(){
+        while(front!= nullptr){
+            dequeue();
+        };
     }
 };
 
