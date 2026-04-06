@@ -7,7 +7,7 @@ struct Node{
     Node(int num):data(num), next(nullptr){};
 };
 
-class queue{
+class Queue{
     private:
     Node* front=nullptr;
     Node* rear = nullptr;
@@ -25,7 +25,7 @@ class queue{
             rear=newNode;
         }
     };
-    void denqueue(){
+    void dequeue(){
         if(front == nullptr){
             std::cout<<"\nQueue already empty\n";
             return;
@@ -36,4 +36,37 @@ class queue{
             front=tempNext;
         }
     };
-}
+
+    int peek(){
+        if(front == nullptr){
+            std::cout<<"\nQueue is empty\n";
+            return -1;
+        };
+        return front->data;
+    }
+};
+
+int main(){
+    Queue queue;
+    queue.enqueue(1);
+    queue.enqueue(4);
+    queue.enqueue(5);
+    queue.enqueue(6);
+    std::cout<<"\nNow Dequeue and peek in alternate\n";
+    int a = queue.peek();
+    std::cout<<"\n"<<a<<"\n";
+    queue.dequeue();
+    int b = queue.peek();
+    std::cout<<"\n"<<b<<"\n";
+    queue.dequeue();
+    int c = queue.peek();
+    std::cout<<"\n"<<c<<"\n";
+    queue.dequeue();
+    int d = queue.peek();
+    std::cout<<"\n"<<d<<"\n";
+    queue.dequeue();
+
+    queue.dequeue();
+
+    return 0;
+};
