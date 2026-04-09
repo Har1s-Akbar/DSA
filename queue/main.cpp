@@ -25,6 +25,7 @@ class Queue{
             rear=newNode;
         }
     };
+
     void dequeue(){
         if(front == nullptr){
             std::cout<<"\nQueue already empty\n";
@@ -47,7 +48,7 @@ class Queue{
             return -1;
         };
         return front->data;
-    }
+    };
     ~Queue(){
         while(front!= nullptr){
             dequeue();
