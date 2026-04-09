@@ -29,7 +29,10 @@ class Dequeue{
 
         void dequeue(){
             if(front == nullptr){
-
+                std::cout<<"\n empty\n";
+                return;
+            }else{
+                
             }
         }
     }
