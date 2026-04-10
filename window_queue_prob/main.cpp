@@ -32,12 +32,15 @@ class Dequeue{
                 rear = nullptr;
                 std::cout<<"\n empty\n";
                 return;
+            }
+            Node* temp = front;
+            front = front->next;
+            if(front != nullptr){
+            front->prev = nullptr;
             }else{
-                Node* temp = front;
-                front = front->next;
-                front->prev = nullptr;
-                delete temp;
-            };
+                rear = nullptr;
+            }
+            delete temp;
         }
     void popRear(){
             if(rear == nullptr){
@@ -85,4 +88,8 @@ class Dequeue{
                 temp=tempNext;
             };
         }
+};
+
+int maximumSlidingWindow(int array[], int window ){
+
 };
