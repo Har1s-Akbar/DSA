@@ -29,11 +29,24 @@ class Dequeue{
 
         void dequeue(){
             if(front == nullptr){
+                rear == nullptr;
                 std::cout<<"\n empty\n";
                 return;
             }else{
-                
-            }
+                Node* temp = front;
+                front = front->next;
+                front->prev = nullptr;
+                delete temp;
+            };
         }
+        void popRear(){
+            if(rear == nullptr){
+                front == nullptr;
+                std::cout<<"\nQueue empty\n";
+            };
+            Node* temp = rear;
+            rear= rear->prev;
+            rear->prev->next =nullptr;
+        };
     }
 };
