@@ -26,8 +26,8 @@ class Dequeue{
             newNode->prev = rear;
             rear = newNode;
         }
-
-        void dequeue(){
+    };
+    void dequeue(){
             if(front == nullptr){
                 rear = nullptr;
                 std::cout<<"\n empty\n";
@@ -39,7 +39,7 @@ class Dequeue{
                 delete temp;
             };
         }
-        void popRear(){
+    void popRear(){
             if(rear == nullptr){
                 front = nullptr;
                 std::cout<<"\nQueue empty\n";
@@ -53,7 +53,7 @@ class Dequeue{
                 front = nullptr;
             };
             delete temp;
-        };
+        }
         int peekFront(){
             if(front == nullptr){
                 std::cout<<"\nQueue is empty\n";
@@ -84,6 +84,5 @@ class Dequeue{
                 delete temp;
                 temp=tempNext;
             };
-        };
-    }
+        }
 };
