@@ -90,7 +90,7 @@ class Dequeue{
         }
 };
 
-int maximumSlidingWindow(int array[],int n, int window ){
+void maximumSlidingWindow(int array[],int n, int window ){
     Dequeue queue;
     int num=0;
     for(int i =0; i<n;i++){
@@ -100,7 +100,7 @@ int maximumSlidingWindow(int array[],int n, int window ){
         queue.enqueue(array[i]);
 
         if(i>window){
-            if(array[i-window] == queue.peekFront()){
+            if(array[i-window] >= queue.peekFront()){
                 queue.dequeue();
             }
         };
@@ -111,6 +111,6 @@ int maximumSlidingWindow(int array[],int n, int window ){
 };
 
 int main(){
-    int array1[10]={1,5,32,9,8,0,1,7,2,3};
-    
+    int array1[10]={1,5,3,9,8,0,1,7,2,3};
+    maximumSlidingWindow( array1,10,3);
 }
