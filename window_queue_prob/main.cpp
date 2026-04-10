@@ -94,18 +94,23 @@ int maximumSlidingWindow(int array[],int n, int window ){
     Dequeue queue;
     int num=0;
     for(int i =0; i<n;i++){
-        num++;
-        if(queue.isEmpty()){
-            queue.enqueue(array[i]);
-            continue;
-        }else{
-            if(queue.peekRear()>array[i] && array[i]>queue.peekRear()/2){
-                queue.enqueue(array[i]);
-            }else{
-                queue.popRear();
-                queue.enqueue(array[i]);
+        while(!queue.isEmpty() && queue.peekRear()<array[i]){
+            queue.popRear();
+        };
+        queue.enqueue(array[i]);
+
+        if(i>window){
+            if(array[i-window] == queue.peekFront()){
+                queue.dequeue();
             }
         };
-        if(num == window) return;
+        if(i>=window-1){
+            std::cout<<"\nThe biggest number in our sliding window is \n"<<queue.peekFront()<<"\n";
+        };
     };
 };
+
+int main(){
+    int array1[10]={1,5,32,9,8,0,1,7,2,3};
+    
+}
