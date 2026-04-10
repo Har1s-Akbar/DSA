@@ -90,6 +90,22 @@ class Dequeue{
         }
 };
 
-int maximumSlidingWindow(int array[], int window ){
-
+int maximumSlidingWindow(int array[],int n, int window ){
+    Dequeue queue;
+    int num=0;
+    for(int i =0; i<n;i++){
+        num++;
+        if(queue.isEmpty()){
+            queue.enqueue(array[i]);
+            continue;
+        }else{
+            if(queue.peekRear()>array[i] && array[i]>queue.peekRear()/2){
+                queue.enqueue(array[i]);
+            }else{
+                queue.popRear();
+                queue.enqueue(array[i]);
+            }
+        };
+        if(num == window) return;
+    };
 };
