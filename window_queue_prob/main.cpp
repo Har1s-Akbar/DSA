@@ -29,7 +29,7 @@ class Dequeue{
 
         void dequeue(){
             if(front == nullptr){
-                rear == nullptr;
+                rear = nullptr;
                 std::cout<<"\n empty\n";
                 return;
             }else{
@@ -41,12 +41,49 @@ class Dequeue{
         }
         void popRear(){
             if(rear == nullptr){
-                front == nullptr;
+                front = nullptr;
                 std::cout<<"\nQueue empty\n";
+                return;
             };
             Node* temp = rear;
             rear= rear->prev;
-            rear->prev->next =nullptr;
+            if(rear!= nullptr){
+                rear->next =nullptr;
+            }else{
+                front = nullptr;
+            };
+            delete temp;
+        };
+        int peekFront(){
+            if(front == nullptr){
+                std::cout<<"\nQueue is empty\n";
+                return 0;
+            };
+            return front->data;
+        };
+        int peekRear(){
+            if(rear == nullptr){
+                std::cout<<"\nQueue is empty\n";
+                return 0;
+            };
+            return rear->data;
+        };
+
+        bool isEmpty(){
+            if(front == nullptr){
+                return 1;
+            };
+            return 0;
+        };
+
+        ~Dequeue(){
+            Node* temp = front;
+            Node* tempNext = nullptr;
+            while(temp != nullptr){
+                tempNext = temp->next;
+                delete temp;
+                temp=tempNext;
+            };
         };
     }
 };
