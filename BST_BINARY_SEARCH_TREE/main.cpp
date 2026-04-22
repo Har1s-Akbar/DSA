@@ -20,7 +20,18 @@ class BST{
         }else{
             return;
         }
-    }
+    };
+
+    void printInOrder(Node* node){
+        if(node != nullptr){
+            printInOrder(node->left);
+            std::cout<<' '<<node->data<< ' ';
+            printInOrder(node->right);
+        }else{
+            return;
+        };
+    };
+
     public:
     void insert(int num){
         Node* newNode = new Node(num);
@@ -66,6 +77,15 @@ class BST{
         }
     };
     
+    void inOrder(){
+        Node* temp = root;
+        if(temp == nullptr){
+            std::cout<<'\nTree is Empty\n';
+        }else{
+            printInOrder(temp);
+        }
+    };
+
     ~BST(){
         Node* temp = root;
         clear(temp);
