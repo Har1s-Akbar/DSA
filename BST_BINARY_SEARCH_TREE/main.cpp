@@ -12,6 +12,15 @@ class BST{
     private:
         Node* root= nullptr;
 
+    void clear (Node* node){
+        if(node != nullptr){
+            clear(node->left);
+            clear(node->right);
+            delete node;
+        }else{
+            return;
+        }
+    }
     public:
     void insert(int num){
         Node* newNode = new Node(num);
@@ -25,7 +34,9 @@ class BST{
                 if(temp->data > num){
                     temp = temp->left;
                 }else if(temp->data == num){
-                    std::cout<<'/nValue Already exists';
+                    std::cout<<'\nValue Already exists';
+                    delete newNode;
+                    return;
                 }else{
                     temp = temp->right;
                 };
@@ -39,21 +50,25 @@ class BST{
     };
     void search(int num){
         Node* temp =  root;
-        Node* tempParent = nullptr;
         int level = 0;
-        while(temp->data != num && temp!= nullptr){
-            tempParent = temp;
+        while(temp!= nullptr && temp->data != num){
             if(temp->data  > num){
-                temp= temp->right;
-            }else{
                 temp= temp->left;
+            }else{
+                temp= temp->right;
             };
             level++;
         };
-        if(tempParent->left != nullptr || tempParent ->right != nullptr){
-            std::cout<<tempParent->data<<'/n Found at tree level '<<level<<'/n';
+        if(temp != nullptr){
+            std::cout<<temp->data<<'\n Found at tree level '<<level<<'\n';
         }else{
-            std::cout<<'/nRecord not found';
+            std::cout<<'\nRecord not found';
         }
+    };
+    
+    ~BST(){
+        Node* temp = root;
+        clear(temp);
+        root = nullptr;
     };
 };
