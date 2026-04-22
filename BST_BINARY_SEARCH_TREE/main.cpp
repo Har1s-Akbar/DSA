@@ -45,7 +45,7 @@ class BST{
                 if(temp->data > num){
                     temp = temp->left;
                 }else if(temp->data == num){
-                    std::cout<<'\nValue Already exists';
+                    std::cout<<"\nValue Already exists";
                     delete newNode;
                     return;
                 }else{
@@ -71,16 +71,16 @@ class BST{
             level++;
         };
         if(temp != nullptr){
-            std::cout<<temp->data<<'\n Found at tree level '<<level<<'\n';
+            std::cout<<temp->data<<"\n Found at tree level "<<level<<"\n";
         }else{
-            std::cout<<'\nRecord not found';
+            std::cout<<"\nRecord not found";
         }
     };
     
     void inOrder(){
         Node* temp = root;
         if(temp == nullptr){
-            std::cout<<'\nTree is Empty\n';
+            std::cout<<"\nTree is Empty\n";
         }else{
             printInOrder(temp);
         }
@@ -92,3 +92,25 @@ class BST{
         root = nullptr;
     };
 };
+
+int main(){
+    BST tree;
+    tree.insert(5);
+    tree.insert(3);
+    tree.insert(7);
+    tree.insert(2);
+    tree.insert(4);
+    tree.insert(6);
+    tree.insert(8);
+
+    std::cout<<"In-order Traversal: ";
+    tree.inOrder();
+
+    std::cout<<"\n\nSearching for 4:\n";
+    tree.search(4);
+
+    std::cout<<"\nSearching for 10:\n";
+    tree.search(10);
+
+    return 0;
+}
