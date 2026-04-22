@@ -34,11 +34,24 @@ class BST{
 
     int findmin(Node* node){
         if( node == nullptr){
+            std::cout<<"\nTree is empty";
             return -1;
-        }else if(node->left == nullptr){
+        };
+        if(node->left == nullptr){
             return node->data;
         }
         return findmin(node->left);
+    };
+
+    int findmax(Node* node){
+        if(node == nullptr){
+            std::cout<<"\nTree is empty";
+            return -1;
+        };
+        if(node->right == nullptr){
+            return node->data;
+        };
+        return findmax(node->right);
     };
 
     public:
@@ -97,9 +110,15 @@ class BST{
 
     int min(){
         Node* temp = root;
-        int num  = findmin(temp);
-        return num;
+        return findmin(temp);
+        
     }
+
+    int max(){
+        Node* temp = root;
+
+        return findmax(temp);
+    };
 
     ~BST(){
         Node* temp = root;
@@ -129,5 +148,9 @@ int main(){
 
     int num = tree.min();
     std::cout<<"\nThe min is "<<num;
+
+    int num1 = tree.max();
+    std::cout<<"\nThe max is "<<num1;
+    
     return 0;
 }
