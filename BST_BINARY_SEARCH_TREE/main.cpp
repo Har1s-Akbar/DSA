@@ -37,5 +37,23 @@ class BST{
             };
         };
     };
-    
+    void search(int num){
+        Node* temp =  root;
+        Node* tempParent = nullptr;
+        int level = 0;
+        while(temp->data != num && temp!= nullptr){
+            tempParent = temp;
+            if(temp->data  > num){
+                temp= temp->right;
+            }else{
+                temp= temp->left;
+            };
+            level++;
+        };
+        if(tempParent->left != nullptr || tempParent ->right != nullptr){
+            std::cout<<tempParent->data<<'/n Found at tree level '<<level<<'/n';
+        }else{
+            std::cout<<'/nRecord not found';
+        }
+    };
 };
