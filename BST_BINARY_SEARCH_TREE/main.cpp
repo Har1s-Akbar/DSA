@@ -32,6 +32,15 @@ class BST{
         };
     };
 
+    int findmin(Node* node){
+        if( node == nullptr){
+            return -1;
+        }else if(node->left == nullptr){
+            return node->data;
+        }
+        return findmin(node->left);
+    };
+
     public:
     void insert(int num){
         Node* newNode = new Node(num);
@@ -86,6 +95,12 @@ class BST{
         }
     };
 
+    int min(){
+        Node* temp = root;
+        int num  = findmin(temp);
+        return num;
+    }
+
     ~BST(){
         Node* temp = root;
         clear(temp);
@@ -99,7 +114,7 @@ int main(){
     tree.insert(3);
     tree.insert(7);
     tree.insert(2);
-    tree.insert(4);
+    tree.insert(1);
     tree.insert(6);
     tree.insert(8);
 
@@ -112,5 +127,7 @@ int main(){
     std::cout<<"\nSearching for 10:\n";
     tree.search(10);
 
+    int num = tree.min();
+    std::cout<<"\nThe min is "<<num;
     return 0;
 }
