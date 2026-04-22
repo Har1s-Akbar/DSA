@@ -54,6 +54,21 @@ class BST{
         return findmax(node->right);
     };
 
+
+    int calcHeight(Node* node){
+        if(node == nullptr){
+            return -1;
+        };
+        int totalLeft = calcHeight(node->left);
+        int totalRight= calcHeight(node->right);
+
+        if(totalLeft>totalRight){
+            return totalLeft +1;
+        };
+        return totalRight+1;
+
+    };
+
     public:
     void insert(int num){
         Node* newNode = new Node(num);
@@ -120,6 +135,11 @@ class BST{
         return findmax(temp);
     };
 
+    int height(){
+        Node* temp = root;
+        return calcHeight(temp);
+    };
+
     ~BST(){
         Node* temp = root;
         clear(temp);
@@ -129,13 +149,16 @@ class BST{
 
 int main(){
     BST tree;
-    tree.insert(5);
+    tree.insert(9);
     tree.insert(3);
     tree.insert(7);
     tree.insert(2);
-    tree.insert(1);
+    tree.insert(4);
     tree.insert(6);
     tree.insert(8);
+    tree.insert(11);
+    tree.insert(16);
+    tree.insert(1);
 
     std::cout<<"In-order Traversal: ";
     tree.inOrder();
@@ -151,6 +174,10 @@ int main(){
 
     int num1 = tree.max();
     std::cout<<"\nThe max is "<<num1;
-    
+
+    int num2 = tree.height();
+    std::cout<<"\nThe height is "<<num2;
+
+
     return 0;
 }
