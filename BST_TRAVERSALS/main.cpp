@@ -44,6 +44,23 @@ class BST{
         }
     }
 
+    bool calcIsBst(Node* node, int*& prev){
+        if(node == nullptr){
+            return true;
+        };
+        if(!calcIsBst(node->left, prev)){
+            return false;
+        }
+
+        if(prev!= nullptr && node->data <=*prev){
+            return false;
+        }
+
+        prev = &node->data;
+
+        return calcIsBst(node->right, prev);
+    }
+
     public:
     void insert(int num){
         Node* newNode = new Node(num);
@@ -78,8 +95,8 @@ class BST{
             std::cout<<"\nTree is empty\n";
         }else{
             Node* temp = root;
-            int level = 0;
-            while(temp != nullptr && temp->data != num){
+            int level = -1;
+            while(temp != nullptr){
                 level++;
                 if(num>temp->data){
                     temp = temp->right;
@@ -109,11 +126,18 @@ class BST{
         calcPostOrder(temp);
     };
 
+    bool isBST(){
+        Node* temp = root;
+        int* prev = nullptr;
+        return calcIsBst(temp , prev);
+    };
+
     ~BST(){
         Node* temp = root;
         clear(temp);
         root = nullptr;
     };
+
 };
 
 int main(){
@@ -134,4 +158,12 @@ int main(){
 
     std::cout<<"\nPost Order Traversal: ";
     tree.postOrder();    
+
+    int search;
+    std::cout<<"\nWhat do you want to search in the tree\n";
+    std::cin>>search;
+    std::cout<<"\nSearching for the record ";
+    tree.search(search);
+
+    std::cout<<"\nchecking if tree is BST "<<tree.isBST();
 };
