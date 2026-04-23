@@ -61,6 +61,30 @@ class BST{
         return calcIsBst(node->right, prev);
     }
 
+    void  handleDelete(Node* node, int num){
+        if(node != nullptr && node->data != num){
+            handleDelete(node->left, num);
+            handleDelete(node->right, num);
+        }else{
+            if(node->left == nullptr && node->right == nullptr){
+                delete node;
+            }else if(node->left != nullptr || node->right!= nullptr){
+                if(node->left!= nullptr){
+                    node->data = node->left->data;
+                    delete node->left;
+                }else{
+                    node->data = node->right->data;
+                    delete node->right;
+                }
+            }else{
+                node = node->right;
+                while(node != nullptr){
+                    
+                }
+            }
+        }
+    }
+
     public:
     void insert(int num){
         Node* newNode = new Node(num);
@@ -130,6 +154,10 @@ class BST{
         Node* temp = root;
         int* prev = nullptr;
         return calcIsBst(temp , prev);
+    };
+
+    void deleteNode(int num){
+        handleDelete(root, num);
     };
 
     ~BST(){
