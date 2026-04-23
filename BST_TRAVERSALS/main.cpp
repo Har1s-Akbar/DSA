@@ -61,7 +61,7 @@ class BST{
         return calcIsBst(node->right, prev);
     }
 
-    void  handleDelete(Node* node, int num){
+    void  handleDelete(Node*& node, int num){
         if(node != nullptr && node->data != num){
             handleDelete(node->left, num);
             handleDelete(node->right, num);
@@ -77,10 +77,15 @@ class BST{
                     delete node->right;
                 }
             }else{
+                Node* originalNode = node;
                 node = node->right;
+                Node* temp = nullptr;
                 while(node != nullptr){
-                    
-                }
+                    temp = node;
+                    node = node->left;
+                };
+                originalNode ->data = temp->data;
+                delete temp;
             }
         }
     }
