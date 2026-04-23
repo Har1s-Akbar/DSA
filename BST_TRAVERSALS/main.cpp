@@ -22,11 +22,9 @@ class BST{
 
     void calcPreOrder(Node* node){
         if(node != nullptr){
-            std::cout<<" "<<node->data<<" ";
+            std::cout<<" "<<node->data;
             calcPreOrder(node->left);
             calcPreOrder(node->right);
-        }else{
-            return;
         }
     };
 
@@ -35,8 +33,16 @@ class BST{
         calcInOrder(node->left);
         std::cout<<" "<<node->data;
         calcInOrder(node->right);
+    }
     };
-    };
+
+    void calcPostOrder(Node* node){
+        if(node != nullptr){
+            calcPostOrder(node->left);
+            calcPostOrder(node->right);
+            std::cout<<" "<<node->data;
+        }
+    }
 
     public:
     void insert(int num){
@@ -98,6 +104,11 @@ class BST{
         calcInOrder(temp);
     };
 
+    void postOrder(){
+        Node* temp = root;
+        calcPostOrder(temp);
+    };
+
     ~BST(){
         Node* temp = root;
         clear(temp);
@@ -120,4 +131,7 @@ int main(){
 
     std::cout<<"\nIn Order Traversal: ";
     tree.inOrder();
+
+    std::cout<<"\nPost Order Traversal: ";
+    tree.postOrder();    
 };
