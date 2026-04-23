@@ -29,6 +29,15 @@ class BST{
             return;
         }
     };
+
+    void calcInOrder(Node* node){
+    if(node != nullptr){
+        calcInOrder(node->left);
+        std::cout<<" "<<node->data;
+        calcInOrder(node->right);
+    };
+    };
+
     public:
     void insert(int num){
         Node* newNode = new Node(num);
@@ -84,6 +93,11 @@ class BST{
         calcPreOrder(temp);
     };
 
+    void inOrder(){
+        Node* temp = root;
+        calcInOrder(temp);
+    };
+
     ~BST(){
         Node* temp = root;
         clear(temp);
@@ -104,5 +118,6 @@ int main(){
     std::cout<<"\nPre Order Traversal: ";
     tree.preOrder();
 
-
+    std::cout<<"\nIn Order Traversal: ";
+    tree.inOrder();
 };
