@@ -70,16 +70,26 @@ class BST{
             };
             if(node->data == num){
                 Node* tempParent = node;
-                Node* temp = nullptr;
-                temp = tempParent->right;
-                while(temp!= nullptr){
-                    temp= temp->left;
-                };
                 if(tempParent->left == nullptr && tempParent->right == nullptr){
+                    delete tempParent;
+                }else if(tempParent ->left == nullptr || tempParent->right == nullptr){
+                    if(tempParent->left != nullptr){
+                        tempParent->data = tempParent->left->data;
+                        delete tempParent->left;
+                        tempParent->left = nullptr;
+                    }else{
+                        tempParent->data = tempParent->right->data;
+                        delete tempParent->right;
+                        tempParent->right = nullptr;
+                    }
+                }else{
+                    Node* temp = nullptr;
+                    temp = tempParent->right;
+                    while(temp->left != nullptr){
+                        temp= temp->left;
+                    };
                     tempParent->data = temp->data;
                     delete temp;
-                }else if(tempParent ->left == nullptr || tempParent->right == nullptr){
-                    
                 }
             };
         }
