@@ -197,12 +197,27 @@ int main(){
     tree.postOrder();    
 
     int search;
-    std::cout<<"\nWhat do you want to search in the tree\n";
+    std::cout<<"\nWhat do you want to search in the tree: ";
     std::cin>>search;
     std::cout<<"\nSearching for the record ";
     tree.search(search);
 
     std::cout<<"\nchecking if tree is BST "<<tree.isBST();
 
-    
+    std::cout<<"\nNode deletion Enter a number: ";
+    int numDelete;
+    std::cin>>numDelete;
+    tree.deleteNode(numDelete);
+
+    std::cout<<"\nThe Tree becomes\n";
+
+    std::cout<<"\nPre Order Traversal: ";
+    tree.preOrder();
+
+    std::cout<<"\nIn Order Traversal: ";
+    tree.inOrder();
+
+    std::cout<<"\nPost Order Traversal: ";
+    tree.postOrder();    
+
 };
