@@ -67,29 +67,28 @@ class BST{
                 handleDelete(node->left, num);
             }else{
                 handleDelete(node->right, num);
-            };
+            }
             if(node->data == num){
-                Node* tempParent = node;
-                if(tempParent->left == nullptr && tempParent->right == nullptr){
-                    delete tempParent;
-                }else if(tempParent ->left == nullptr || tempParent->right == nullptr){
-                    if(tempParent->left != nullptr){
-                        tempParent->data = tempParent->left->data;
-                        delete tempParent->left;
-                        tempParent->left = nullptr;
-                    }else{
-                        tempParent->data = tempParent->right->data;
-                        delete tempParent->right;
-                        tempParent->right = nullptr;
+                if(node->left == nullptr && node->right == nullptr){
+                    delete node;
+                    node = nullptr;
+                }else if(node ->left == nullptr || node->right == nullptr){
+                    if(node->left != nullptr){
+                        Node* nodeDelete = node;
+                        node = node->left;
+                        delete nodeDelete;
+                    }else if(node->right != nullptr){
+                        Node* nodeDelete = node;
+                        node = node->right;
+                        delete nodeDelete;
                     }
                 }else{
-                    Node* temp = nullptr;
-                    temp = tempParent->right;
+                    Node* temp = node->right;
                     while(temp->left != nullptr){
                         temp= temp->left;
                     };
-                    tempParent->data = temp->data;
-                    delete temp;
+                    node->data = temp->data;
+                    handleDelete(node->right,node->data);
                 }
             };
         }
@@ -204,4 +203,6 @@ int main(){
     tree.search(search);
 
     std::cout<<"\nchecking if tree is BST "<<tree.isBST();
+
+    
 };
