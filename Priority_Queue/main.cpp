@@ -15,12 +15,11 @@ class Myheap{
         return (2*i+2);
     }
 
-    void heapifyUp(int num){
-        if(heap.size() == 0){
-            heap.insert(heap.begin(),num);
-        }else{
-            heap.push_back(num);
-            
+    void heapifyUp(int index){
+        while(index > 0 && heap[index]>heap[(index-1)/2]){
+
+        std::swap(heap[(index-1)/2], heap[index]);
+        index = (index-1)/2;
         }
     }
 
@@ -28,7 +27,8 @@ class Myheap{
     public:
 
     void insert(int num){
-        heapifyUp(num);        
-    }
+        heap.push_back(num);
+        heapifyUp(heap.size()-1);
+    }        
     
 }
