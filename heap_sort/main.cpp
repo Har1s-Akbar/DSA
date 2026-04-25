@@ -4,18 +4,6 @@
 class Heap{
     private:
     std::vector<int> heap;
-
-    Heap(std::vector<int> array){
-        heap = array;
-
-        if(heap.size()<=0) return;
-
-        for(int i = (heap.size()/2)-1; i>=0; i--){
-            heapifyDown(i);
-        }
-    }
-
-
     void heapifyUp(int index){
         while(index>0){
             if(heap[index]>heap[(index-1)/2]){
@@ -50,6 +38,18 @@ class Heap{
     }
 
     public:
+
+        Heap(std::vector<int> array){
+        heap = array;
+
+        if(heap.size()<=0) return;
+
+        for(int i = (heap.size()/2)-1; i>=0; i--){
+            heapifyDown(i);
+        }
+    }
+
+
     void insert(int num){
         heap.push_back(num);
         int index = heap.size()-1;
@@ -72,6 +72,13 @@ class Heap{
 
     bool empty(){
         return heap.empty();
-    }
+    };
 
+    void sortedResult(){
+        int index = heap.size()-1;
+        for(int i =0 ; i<=index ; i++){  
+            std::cout<<" "<<top();
+            pop();
+        };
+    }
 };
