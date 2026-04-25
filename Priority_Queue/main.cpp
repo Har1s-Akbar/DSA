@@ -24,16 +24,20 @@ class Myheap{
     }
 
     void heapifyDown(int index){
-        int endIndex = heap.size()-1;
+        int endIndex = heap.size();
+        int largest=index;
         while(index<endIndex){
             if( index*2+1<endIndex && heap[index]<heap[index*2+1]){
-                std::swap(heap[index],heap[index*2+1]);
-                index = 2*index+1;
+                largest = index*2+1;
             };
             if(index*2+2<endIndex && heap[index]<heap[index*2+2]){
-                std::swap(heap[index],heap[index*2+2]);
-                index =2*index+2;
+                largest = index*2+2;
             };
+            if(largest==index)break;
+
+            std::swap(heap[index],heap[largest]);
+
+            index=largest;
         }
     }
 
@@ -48,5 +52,5 @@ class Myheap{
         heap.erase(heap.begin()+heap.size()-1);
         int index = 0;
         heapifyDown(index);
-    }    
+    };
 }
