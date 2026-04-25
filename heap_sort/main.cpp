@@ -10,8 +10,9 @@ class Heap{
 
         if(heap.size()<=0) return;
 
-        
-
+        for(int i = (heap.size()/2)-1; i>=0; i--){
+            heapifyDown(i);
+        }
     }
 
 
@@ -64,5 +65,13 @@ class Heap{
         heapifyDown(index);
 
     };
+
+    int top(){
+        return heap[0];
+    }
+
+    bool empty(){
+        return heap.empty();
+    }
 
 };
