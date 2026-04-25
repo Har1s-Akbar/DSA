@@ -24,15 +24,15 @@ class Myheap{
     }
 
     void heapifyDown(int index){
-        int startIndex = 0;
-        while(index>startIndex){
-            if(heap[startIndex]<heap[startIndex+1]){
-                std::swap(heap[startIndex],heap[startIndex+1]);
-                startIndex = 2*index+1;
+        int endIndex = heap.size()-1;
+        while(index<endIndex){
+            if( index*2+1<endIndex && heap[index]<heap[index*2+1]){
+                std::swap(heap[index],heap[index*2+1]);
+                index = 2*index+1;
             };
-            if(heap[startIndex]<heap[startIndex+2]){
-                std::swap(heap[startIndex],heap[startIndex+2]);
-                startIndex =2*index+2;
+            if(index*2+2<endIndex && heap[index]<heap[index*2+2]){
+                std::swap(heap[index],heap[index*2+2]);
+                index =2*index+2;
             };
         }
     }
@@ -46,7 +46,7 @@ class Myheap{
     void pop(){
         heap[0] = heap[heap.size()-1];
         heap.erase(heap.begin()+heap.size()-1);
-        int index = heap.size()-1;
+        int index = 0;
         heapifyDown(index);
     }    
 }
