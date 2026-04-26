@@ -24,7 +24,7 @@ class Heap{
         int largest= index;
 
         while(index<endIndex){
-            if(index*2+1<endIndex && heap[index]<heap[(index*2+1)]){
+            if(index*2+1<endIndex && heap[largest]<heap[(index*2+1)]){
                 largest = index*2+1;
             };
             if(index*2+2 <endIndex && heap[largest] < heap[index*2+2]){
