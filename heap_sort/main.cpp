@@ -20,10 +20,10 @@ class Heap{
         int largest= index;
 
         while(index<endIndex){
-            if(largest<endIndex && heap[index]<heap[(index*2+1)]){
+            if(index*2+1<endIndex && heap[index]<heap[(index*2+1)]){
                 largest = index*2+1;
             };
-            if(largest <endIndex && heap[largest] < heap[index*2+2]){
+            if(index*2+2 <endIndex && heap[largest] < heap[index*2+2]){
                 largest = index*2+2;
             };
 
@@ -63,7 +63,6 @@ class Heap{
         heap.erase(heap.begin()+heap.size()-1);
 
         heapifyDown(index);
-
     };
 
     int top(){
@@ -74,11 +73,14 @@ class Heap{
         return heap.empty();
     };
 
-    void sortedResult(){
+    std::vector<int> sortedResult(){
+        std::vector<int> sortedHeap;
+        if(heap.size() == 0)return sortedHeap;
         int index = heap.size()-1;
-        for(int i =0 ; i<=index ; i++){  
-            std::cout<<" "<<top();
+        for(int i =0 ; i<=index ; i++){
+            sortedHeap.push_back(top());
             pop();
         };
+        return sortedHeap;
     }
 };
