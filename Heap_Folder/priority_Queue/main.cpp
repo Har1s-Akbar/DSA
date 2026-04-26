@@ -70,3 +70,21 @@ class Priority_Queue{
     }
 
 };
+
+
+int main(){
+    Priority_Queue queue;
+
+    Task task1={"Edit",2};
+    std::vector<std::string> jobs= {"Edit","Switch","close","Time Sharing","Delete","Change","Push"};
+    for (int i =0; i<7;i++){
+        std::string task = "task" + i;
+        Task tasks = {jobs[i],i};
+        queue.push(tasks);
+    }
+    for(int i =0;i<7;i++){
+        std::cout<<i+1<<" - "<<" Job - "<<queue.top().task<<" & Priority - "<<queue.top().priority<<"\n";
+        queue.pop();
+    }
+
+}
