@@ -34,6 +34,19 @@ class Avl{
             return getHeight(node->left)-getHeight(node->right);
         };
 
+        Node* roatetRight(Node* y){
+            Node* x = y->left;
+            Node* z = x->right;
+
+            x->right = y;
+            y->left = z;
+
+            updateHeight(y);
+            updateHeight(x);
+            return x;
+
+        };
+
 
         // void nodeRotation(Node*& temp, int num){
         //     if(root == nullptr){
