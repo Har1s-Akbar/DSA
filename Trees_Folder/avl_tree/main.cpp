@@ -61,6 +61,9 @@ class Avl{
 
 
         Node* insertionHandle(Node* node, int key){
+            if(node == nullptr){
+                return new Node(key);
+            };
             if(key>node->data){
                 node->right = insertionHandle(node->right,key);
             }
@@ -74,35 +77,48 @@ class Avl{
             updateHeight(node);
             int balance = getBalance(node);
 
-            if(balance>1 && key > node->data){
+            if(balance>1 && key < node->left->data){
                 return rotateRight(node);
             };
 
-            if(balance<-1&& key < node->data){
+            if(balance<-1&& key > node->right->data){
                 return rotateLeft(node);
             }
 
             if(balance>1 && key> node->left->data){
-                node->left = rotateLeft(node);
+                node->left = rotateLeft(node->left);
                 return rotateRight(node);
             };
 
-            if(balance<1 && key <node->right->data){
-                node->right = rotateRight(node);
+            if(balance<-1 && key <node->right->data){
+                node->right = rotateRight(node->right);
                 return rotateLeft(node);
             }
 
+            return node;
 
+        };
+
+        void printInOrder(Node* node){
+            if(node == nullptr){
+                std::cout<<"\nTree  is already empty\n";
+            }else{
+                printInOrder(node->left);
+                std::cout<<" "<<node->data;
+                printInOrder(node->right);
+            };
         };
 
     public:
         void insert(int num){
-            Node* newNode = new Node(num);
-            if(root == nullptr){
-                root = newNode;
-            }else if(root != nullptr){
-                insertionHandle(newNode, num);
-            };
+            root = insertionHandle(root, num);
         };
         
+        void print(){
+            printInOrder(root);
+        };
 };
+
+int  main(){
+    
+}
