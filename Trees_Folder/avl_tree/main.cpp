@@ -34,7 +34,7 @@ class Avl{
             return getHeight(node->left)-getHeight(node->right);
         };
 
-        Node* roatetRight(Node* y){
+        Node* rotateRight(Node* y){
             Node* x = y->left;
             Node* z = x->right;
 
@@ -60,30 +60,49 @@ class Avl{
         }
 
 
-        // void nodeRotation(Node*& temp, int num){
-        //     if(root == nullptr){
-        //         return;
-        //     }else{
-        //         Node* tempPointer = root;
-        //         if(tempPointer->data>num){
-        //             nodeRotation(tempPointer->left, num);
-        //         }else if(tempPointer->data == num){
-        //             std::cout<<"Can not insert a duplicate entry";
-        //             return;
-        //         }else{
-        //             nodeRotation(tempPointer->right,num);
-        //         }
-        //     };
-        // };
+        Node* insertionHandle(Node* node, int key){
+            if(key>node->data){
+                node->right = insertionHandle(node->right,key);
+            }
+            else if(key<node->data){
+                node->left = insertionHandle(node->left,key);
+            }else{
+                std::cout<<"\nkey already exists\n";
+                return node;
+            }
+
+            updateHeight(node);
+            int balance = getBalance(node);
+
+            if(balance>1 && key > node->data){
+                return rotateRight(node);
+            };
+
+            if(balance<-1&& key < node->data){
+                return rotateLeft(node);
+            }
+
+            if(balance>1 && key> node->left->data){
+                node->left = rotateLeft(node);
+                return rotateRight(node);
+            };
+
+            if(balance<1 && key <node->right->data){
+                node->right = rotateRight(node);
+                return rotateLeft(node);
+            }
+
+
+        };
 
     public:
-        // void insert(int num){
-        //     Node* newNode = new Node(num);
-        //     if(root == nullptr){
-        //         root = newNode;
-        //     }else if(root != nullptr){
-        //         nodeRotation(newNode, num);
-        //     };
-        // };
+        void insert(int num){
+            Node* newNode = new Node(num);
+            if(root == nullptr){
+                root = newNode;
+            }else if(root != nullptr){
+                insertionHandle(newNode, num);
+            };
+        };
         
 };
