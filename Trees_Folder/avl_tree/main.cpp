@@ -100,9 +100,7 @@ class Avl{
         };
 
         void printInOrder(Node* node){
-            if(node == nullptr){
-                std::cout<<"\nTree  is already empty\n";
-            }else{
+            if(node != nullptr){
                 printInOrder(node->left);
                 std::cout<<" "<<node->data;
                 printInOrder(node->right);
@@ -120,5 +118,15 @@ class Avl{
 };
 
 int  main(){
-    
-}
+    Avl tree;
+    tree.insert(100);
+    tree.insert(10);
+    tree.insert(50);
+    tree.insert(9);
+    tree.insert(70);
+    tree.insert(56);
+
+    tree.print();
+
+    return 0;
+};
