@@ -9,12 +9,7 @@ class Graph{
 
     public:
     void addEdge(std::string baseVertex, std::string targetVertex){
-        auto it = graph.find(baseVertex);
-
-        if(it != graph.end()){
-            it->second.push_back(targetVertex);
-        }else{
-            graph.try_emplace(baseVertex, {targetVertex});
-        }
+        graph[baseVertex].push_back(targetVertex);
+        graph[targetVertex].push_back(baseVertex);
     };
 };
