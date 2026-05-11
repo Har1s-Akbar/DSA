@@ -36,6 +36,8 @@ class Graph{
             std::string curr = current.front();
             current.pop();
 
+            std::cout<<curr<<" ";
+
             auto it = graph.find(curr);
             if(it!= graph.end()){
                 const std::vector<std::string>& neighbours = it->second;
@@ -64,7 +66,7 @@ int main() {
     mySocialNetwork.printVertices();
 
     std::cout << "\nBFS Traversal from Alice: ";
-    mySocialNetwork.bfSearch("Alice");
+    mySocialNetwork.bfSearch("David");
 
     return 0;
 }
