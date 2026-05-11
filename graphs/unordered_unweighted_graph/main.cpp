@@ -2,6 +2,8 @@
 #include <vector>
 #include <unordered_map>
 #include <string>
+#include <queue>
+#include <unordered_set>
 
 class Graph{
     private:
@@ -18,12 +20,22 @@ class Graph{
         }
 
         for(const auto& [vertex, neighbours] : graph){
-            std::cout<<"\n-"<<vertex<<"\n";
+            std::cout<<"\n-"<<vertex<<":\n";
             for(const auto& x:neighbours){
                 std::cout<<x<<" ";
             }
         };
     }
+    void bfSearch(std::string start){
+        std::queue<std::string> current ;
+        std::unordered_set<std::string> visited ;
+
+        current.push(start);
+        visited.insert(start);
+        while(!current.empty()){
+            
+        };
+    };
 };
 
 
