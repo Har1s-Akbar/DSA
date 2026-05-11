@@ -33,7 +33,19 @@ class Graph{
         current.push(start);
         visited.insert(start);
         while(!current.empty()){
-            
+            std::string curr = current.front();
+            current.pop();
+
+            auto it = graph.find(curr);
+            if(it!= graph.end()){
+                const std::vector<std::string>& neighbours = it->second;
+                for(const auto& neigh:neighbours){
+                    if (visited.find(neigh) == visited.end()) {
+                        visited.insert(neigh);
+                        current.push(neigh);
+                    };
+                };
+            };
         };
     };
 };
@@ -47,6 +59,12 @@ int main() {
     mySocialNetwork.addEdge("Bob", "David");
 
     mySocialNetwork.printVertices();
+
+    std::cout << "Adjacency List:";
+    mySocialNetwork.printVertices();
+
+    std::cout << "\nBFS Traversal from Alice: ";
+    mySocialNetwork.bfSearch("Alice");
 
     return 0;
 }
